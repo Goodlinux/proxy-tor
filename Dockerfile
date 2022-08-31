@@ -10,8 +10,11 @@ RUN apk --no-cache --no-progress -U add privoxy tor runit tini							\
 	&& echo "forward-socks5 / localhost:9050 ."		>>     /etc/service/privoxy/config	\
 	&& echo "#!/bin/sh"								>     /etc/service/privoxy/run		\
 	&& echo "privoxy --no-daemon"					>>     /etc/service/privoxy/run		\
-	&& echo "SOCKSPort 0.0.0.0:9050"		>     /etc/service/tor/torrc				\
-	&& echo "ExitNodes {ca},{us},{de},{nl} StrictNodes 0"  >>  /etc/service/tor/torrc   \
+	&& echo "SOCKSPort 0.0.0.0:9050"		                           >     /etc/service/tor/torrc	\
+	&& echo "ExitNodes {ca},{us},{de},{nl} StrictNodes 0"              >>  /etc/service/tor/torrc   \
+	&& echo "CircuitStreamTimeout 300"                                 >>  /etc/service/tor/torrc   \
+	&& echo "BridgeRelay 1"                                            >>  /etc/service/tor/torrc   \
+	&& echo "ExitPolicy reject *:* #Pour ne pas être noeud de sortie"  >>  /etc/service/tor/torrc   \
 	&& echo "#!/bin/sh"						>     /etc/service/tor/run					\
 	&& echo "tor -f ./torrc"				>>     /etc/service/tor/run                 \
 	&& echo "#!/bin/sh"								>     /usr/local/bin/entrypoint.sh	\
