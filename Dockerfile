@@ -13,7 +13,6 @@ RUN apk --no-cache --no-progress -U add privoxy tor runit tini							\
 	&& echo "SOCKSPort 0.0.0.0:9050"		                           >     /etc/service/tor/torrc	\
 	&& echo "ExitNodes {ca},{us},{de},{nl} StrictNodes 0"              >>  /etc/service/tor/torrc   \
 	&& echo "CircuitStreamTimeout 300"                                 >>  /etc/service/tor/torrc   \
-	&& echo "BridgeRelay 1"                                            >>  /etc/service/tor/torrc   \
 	&& echo "ExitPolicy reject *:* #Pour ne pas être noeud de sortie"  >>  /etc/service/tor/torrc   \
 	&& echo "#!/bin/sh"						>     /etc/service/tor/run					\
 	&& echo "tor -f ./torrc"				>>     /etc/service/tor/run                 \
