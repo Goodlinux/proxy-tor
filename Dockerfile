@@ -3,7 +3,7 @@ MAINTAINER Ludovic MAILLET <ludovic.maillet@gmail.com>
 
 EXPOSE 8118/tcp 9050/tcp
 
-# ENV EXIT_NODE="{ca},{us},{de},{nl}"
+ENV EXIT_NODE="{ca},{us},{de},{nl}"
 
 # Install tor and privoxy
 RUN apk --no-cache -U add privoxy tor runit tini							\
